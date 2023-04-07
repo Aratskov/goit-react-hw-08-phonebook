@@ -24,7 +24,6 @@ export const ContactForm = () => {
       : dispatch(add({ ...state, id: nanoid() }));
   };
 
-  
   return (
     <Form onSubmit={onSubmit}>
       <Input
