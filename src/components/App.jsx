@@ -2,10 +2,23 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { Container, ContainerWrap } from './App.styled';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts, getError, getIsLoading } from 'redux/selectors';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
+import { Loader } from './Loader/Loader';
 
 export const App = () => {
-  const contacts = useSelector(state => state.contact.contacts);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const contacts = useSelector(getContacts);
+
   return (
     <ContainerWrap>
       <Container>
@@ -19,6 +32,7 @@ export const App = () => {
         )}
 
         <ContactList />
+        {isLoading && !error && <Loader />}
       </Container>
     </ContainerWrap>
   );

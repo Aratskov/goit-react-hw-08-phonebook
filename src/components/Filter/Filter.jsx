@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { Input } from './Filter.styled';
-import { filters } from 'redux/contact';
+import { filter } from 'redux/contactSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
 
   const handlerInput = event => {
     const { value } = event.target;
-    dispatch(filters(value));
+    dispatch(filter(value));
   };
 
   return (
