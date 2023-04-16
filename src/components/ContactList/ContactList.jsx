@@ -1,7 +1,7 @@
 import { List, Item, Btn } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact } from 'redux/operations';
+import { getContacts, getFilter } from 'redux/contact/selectors';
+import { deleteContact } from 'redux/contact/operations';
 
 export const ContactList = () => {
   const contact = useSelector(getContacts);
@@ -14,10 +14,10 @@ export const ContactList = () => {
 
   return (
     <List>
-      {filterList.map(({ id, name, phone }) => (
+      {filterList.map(({ id, name, number }) => (
         <Item key={id}>
           <span>{name} :</span>
-          <span>{phone}</span>
+          <span>{number}</span>
           <Btn
             type="button"
             onClick={() => {
